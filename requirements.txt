@@ -1,0 +1,5 @@
+google-cloud-aiplatform==1.59.0
+flask==3.0.3
+ngrok==1.4.0
+flask-cors==5.0.0
+pandas==2.2.3
