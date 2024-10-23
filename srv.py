@@ -3,7 +3,6 @@ from flask import Flask, jsonify
 import ngrok
 from flask_cors import CORS
 from extractData import getConditionsArray
-import vertexai
 
 conditionsArray = getConditionsArray()
 
