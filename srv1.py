@@ -11,12 +11,9 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/data', methods=['GET'])
+@app.route('/data')
 def get_data():
     
     data = get_result()
     # Returning the data as JSON
     return data
-
-if __name__ == '__main__':
-    app.run(port=80, debug=True)
