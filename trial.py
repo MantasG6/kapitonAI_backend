@@ -25,7 +25,7 @@ messages = [
                 "content": "You are a sailboat expert, providing useful insights to the captain in JSON.\n"
                 # Pass the json schema to the model. Pretty printing improves results.
                 f" The JSON object must use the schema: {json.dumps(Destination.model_json_schema(), indent=2)} \n"
-                "Distance should be in nautical miles and time should be in hours",
+                "Distance should be in nautical miles and time should be in hours (00:00)",
         },
         {
             "role": "user",
