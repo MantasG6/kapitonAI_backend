@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from trial import get_result
+from prompt import get_result
 
 app = Flask(__name__)
 

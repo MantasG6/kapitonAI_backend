@@ -1,14 +1,96 @@
-import base64
-from vertexai.generative_models import GenerativeModel, Part, SafetySetting, GenerationConfig
+from groq import Groq
+import json
+from pydantic import BaseModel
+
+class Coordinates(BaseModel):
+    lat: int
+    lon: int
+
+class Destination(BaseModel):
+    coordinates: Coordinates
+    name: str
+    comfortLevel: str
+    distance: float
+    time: str
 
 
-def generate(conditions):
-    model = GenerativeModel(
-        "gemini-1.5-pro-002",
-    )
+client = Groq(
+    api_key="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"
+)
 
-    text1 = f"""<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+
+messages = [
+        {
+            "role": "system",
+                "content": "You are a sailboat expert, providing useful insights to the captain in JSON.\n"
+                # Pass the json schema to the model. Pretty printing improves results.
+                f" The JSON object must use the schema: {json.dumps(Destination.model_json_schema(), indent=2)} \n"
+                "Distance should be in nautical miles and time should be in hours (00:00)",
+        },
+        {
+            "role": "user",
+            "content": f"""
     <sailingData>
+      <location>
+          <name>Palaio Faliro</name>
+          <region>Attica</region>
+          <country>Greece</country>
+          <lat>37.921</lat>
+          <lon>23.709</lon>
+          <tz_id>Europe/Athens</tz_id>
+          <localtime_epoch>1729608957</localtime_epoch>
+          <localtime>2024-10-22 17:55</localtime>
+      </location>
+      <forecast>
+          <forecastday>
+              <date>2024-10-22</date>
+              <date_epoch>1729555200</date_epoch>
+              <day>
+                  <maxtemp_c>20.8</maxtemp_c>
+                  <maxtemp_f>69.4</maxtemp_f>
+                  <mintemp_c>12.7</mintemp_c>
+                  <mintemp_f>54.9</mintemp_f>
+                  <avgtemp_c>17</avgtemp_c>
+                  <avgtemp_f>62.5</avgtemp_f>
+                  <maxwind_mph>15</maxwind_mph>
+                  <maxwind_kph>24.2</maxwind_kph>
+                  <totalprecip_mm>0</totalprecip_mm>
+                  <totalprecip_in>0</totalprecip_in>
+                  <totalsnow_cm>0</totalsnow_cm>
+                  <avgvis_km>10</avgvis_km>
+                  <avgvis_miles>6</avgvis_miles>
+                  <avghumidity>57</avghumidity>
+                  <tides>
+                      <tide>
+                          <tide_time>2024-10-22 03:38</tide_time>
+                          <tide_height_mt>0.20</tide_height_mt>
+                          <tide_type>LOW</tide_type>
+                      </tide>
+                      <tide>
+                          <tide_time>2024-10-22 10:34</tide_time>
+                          <tide_height_mt>0.70</tide_height_mt>
+                          <tide_type>HIGH</tide_type>
+                      </tide>
+                      <tide>
+                          <tide_time>2024-10-22 15:56</tide_time>
+                          <tide_height_mt>0.30</tide_height_mt>
+                          <tide_type>LOW</tide_type>
+                      </tide>
+                      <tide>
+                          <tide_time>2024-10-22 22:53</tide_time>
+                          <tide_height_mt>0.70</tide_height_mt>
+                          <tide_type>HIGH</tide_type>
+                      </tide>
+                  </tides>
+                  <condition>
+                      <text>Partly Cloudy </text>
+                      <icon>//cdn.weatherapi.com/weather/64x64/day/116.png</icon>
+                      <code>1003</code>
+                  </condition>
+                  <uv>5</uv>
+              </day>
+          </forecastday>
+      </forecast>
       <boatInfo>
         <boatType>Cruising Yacht</boatType>
         <length>12.5</length>
@@ -24,21 +106,6 @@ def generate(conditions):
         <crewSize>6</crewSize>
         <hullMaterial>Fiberglass</hullMaterial>
       </boatInfo>
-      <conditions>
-        <speedOverGround>{conditions.speedOverGround}</speedOverGround>
-        <courseOverGround>{conditions.courseOverGround}</courseOverGround>
-        <heelAngle>{conditions.heelAngle}</heelAngle>
-        <windSpeed>{conditions.windSpeed}</windSpeed>
-        <windDirection>{conditions.windDirection}</windDirection>
-        <tideCurrent>
-          <speed>{conditions.tideCurrent.speed}</speed>
-          <direction>{conditions.tideCurrent.direction}</direction>
-        </tideCurrent>
-        <coordinates>
-          <latitude>{conditions.coordinates.latitude}</latitude>
-          <longitude>{conditions.coordinates.longitude}</longitude>
-        </coordinates>
-      </conditions>
       <experience>
         <yearsOfExperience>7</yearsOfExperience>
         <experienceLevel>Intermediate</experienceLevel>
@@ -61,127 +128,25 @@ def generate(conditions):
           <course>Advanced Seamanship</course>
         </sailingCoursesTraining>
       </experience>
-      <goal>
-        <coordinates>
-          <latitude>35.459859</latitude>
-          <longitude>23.590378</longitude>
-        </coordinates>
-        <performance>Comfort over speed</performance>
-      </goal>
     </sailingData>
 
-    <sail_positions>
-      <position id=\"0\">
-        <name>Into the wind</name>
-      </position>
-      <position id=\"-1\">
-        <name>Close Hauled Port side</name>
-      </position>
-      <position id=\"-2\">
-        <name>Close Reach Port side</name>
-      </position>
-      <position id=\"-3\">
-        <name>Beam Reach Port side</name>
-      </position>
-      <position id=\"-4\">
-        <name>Broad Reach Port side</name>
-      </position>
-      <position id=\"-5\">
-        <name>Running Port side</name>
-      </position>
-      <position id=\"1\">
-        <name>Close Hauled Starboard side</name>
-      </position>
-      <position id=\"2\">
-        <name>Close Reach Starboard side</name>
-      </position>
-      <position id=\"3\">
-        <name>Beam Reach Starboard side</name>
-      </position>
-      <position id=\"4\">
-        <name>Broad Reach Starboard side</name>
-      </position>
-      <position id=\"5\">
-        <name>Running Starboard side</name>
-      </position>
-    </sail_positions>
-
-    Based on provided information, could you please give me tips on ACTIONS  (only if action is needed in that area):
-    How should be the main sail position (Give me a position in a form of number -5 to 5 in provided sail_positions, but in description use ONLY ORIGINAL POSITION NAMES),
-    How should be the jib sail position (Give me a position in a form of number -5 to 5 in provided sail_positions, but in description use ONLY ORIGINAL POSITION NAMES),
-    Course (give me a degree value)
-
-    Could you also provide all the information only in Json format and no additional text?"""
-
-    responses = model.generate_content(
-        [text1],
-        generation_config=generation_config,
-        safety_settings=safety_settings,
-        stream=True,
-    )
-
-    my_response = ''
-    for response in responses:
-        my_response += response.text
-
-    return my_response
-
-response_schema = {
-    "type": "object",
-    "properties": {
-        "mainSailPosition": {
-            "type": "number",
-            "description": "Main sail position number (-5 to 5)"
-        },
-        "jibSailPosition": {
-            "type": "number",
-            "description": "Jib sail position number (-5 to 5)"
-        },
-        "shortNoteSails": {
-            "type": "string",
-            "description": "SHORT note about how should I change sail positions"
-        },
-        "course": {
-            "type": "number",
-            "description": "Course in degrees"
-        },
-        "shortNoteCourse": {
-            "type": "string",
-            "description": "SHORT note about how should I change course"
+    Based on provided location, forecast and boatInfo could you please provide me with 3 best locations to travel knowing I want my travel to be comfortable and take me around 6 hours?
+    """
         }
-    },
-    "required": [
-        "mainSailPosition",
-        "jibSailPosition",
-        "shortNoteSails",
-        "course",
-        "shortNoteCourse"
     ]
-}
 
-generation_config = GenerationConfig(
-    max_output_tokens=8192,
-    temperature= 1,
-    top_p=0.95,
-    response_mime_type= "application/json",
-    response_schema= response_schema,
-)
 
-safety_settings = [
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-        threshold=SafetySetting.HarmBlockThreshold.BLOCK_ONLY_HIGH
-    ),
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-        threshold=SafetySetting.HarmBlockThreshold.BLOCK_ONLY_HIGH
-    ),
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-        threshold=SafetySetting.HarmBlockThreshold.BLOCK_ONLY_HIGH
-    ),
-    SafetySetting(
-        category=SafetySetting.HarmCategory.HARM_CATEGORY_HARASSMENT,
-        threshold=SafetySetting.HarmBlockThreshold.BLOCK_ONLY_HIGH
-    ),
-]
+
+def get_result():
+    completion = client.chat.completions.create(
+        model="llama-3.1-70b-versatile",
+        messages=messages,
+        temperature=1,
+        max_tokens=8000,
+        top_p=1,
+        stream=False,
+        stop=None,
+        seed=42,
+        response_format={"type": "json_object"}
+    )
+    return completion.choices[0].message.content
