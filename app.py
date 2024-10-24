@@ -1,9 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from extractData import getConditionsArray
 from trial_v2 import get_result
-
-conditionsArray = getConditionsArray()
 
 app = Flask(__name__)
 
