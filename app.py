@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from trial_v2 import get_result
+from trial import get_result
 
 app = Flask(__name__)
 
@@ -14,3 +14,6 @@ def get_data():
     data = get_result()
     # Returning the data as JSON
     return data
+
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
