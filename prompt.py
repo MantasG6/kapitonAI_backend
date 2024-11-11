@@ -1,18 +1,31 @@
 from groq import Groq
 import json
 from pydantic import BaseModel
+from pydantic import Field
+from weather import forecast, marine
+from dict2xml import dict2xml
 
 class Coordinates(BaseModel):
-    lat: int
-    lon: int
+    lat: float
+    lon: float
 
 class Destination(BaseModel):
     coordinates: Coordinates
-    name: str
-    comfortLevel: str
-    distance: float
-    time: str
+    name: str = Field(description="Destination port name")
+    comfortLevel: str = Field(description="Comfort level of the sailor (Too Little Challenge, Comfortable Sailing, Moderate Sailing, Challenging Sailing, Extreme Sailing, Too Extreme to Sail)")
+    distance: float = Field(description="Distance to the destination port in nautical miles")
+    time: str = Field(description="Time to reach destination port from current location in hours (00:00)")
 
+coords = Coordinates(lat=37.921, lon=23.709)
+
+forecast_json = forecast(coords)
+marine_json = marine(coords)
+
+forecast_dict = json.loads(forecast_json)
+marine_dict = json.loads(marine_json)
+
+forecast_xml = dict2xml(forecast_dict, wrap="forecast", indent="  ")
+marine_xml = dict2xml(marine_dict, wrap="marine", indent="  ")
 
 client = Groq(
     api_key="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"
@@ -24,8 +37,7 @@ messages = [
             "role": "system",
                 "content": "You are a sailboat expert, providing useful insights to the captain in JSON.\n"
                 # Pass the json schema to the model. Pretty printing improves results.
-                f" The JSON object must use the schema: {json.dumps(Destination.model_json_schema(), indent=2)} \n"
-                "Distance should be in nautical miles and time should be in hours (00:00)",
+                f" The JSON object must use the schema: {json.dumps(Destination.model_json_schema(), indent=2)}"
         },
         {
             "role": "user",
@@ -35,62 +47,13 @@ messages = [
           <name>Palaio Faliro</name>
           <region>Attica</region>
           <country>Greece</country>
-          <lat>37.921</lat>
-          <lon>23.709</lon>
+          <lat>{coords.lat}</lat>
+          <lon>{coords.lon}</lon>
           <tz_id>Europe/Athens</tz_id>
-          <localtime_epoch>1729608957</localtime_epoch>
-          <localtime>2024-10-22 17:55</localtime>
+          <localtime>2024-11-12 10:55</localtime>
       </location>
-      <forecast>
-          <forecastday>
-              <date>2024-10-22</date>
-              <date_epoch>1729555200</date_epoch>
-              <day>
-                  <maxtemp_c>20.8</maxtemp_c>
-                  <maxtemp_f>69.4</maxtemp_f>
-                  <mintemp_c>12.7</mintemp_c>
-                  <mintemp_f>54.9</mintemp_f>
-                  <avgtemp_c>17</avgtemp_c>
-                  <avgtemp_f>62.5</avgtemp_f>
-                  <maxwind_mph>15</maxwind_mph>
-                  <maxwind_kph>24.2</maxwind_kph>
-                  <totalprecip_mm>0</totalprecip_mm>
-                  <totalprecip_in>0</totalprecip_in>
-                  <totalsnow_cm>0</totalsnow_cm>
-                  <avgvis_km>10</avgvis_km>
-                  <avgvis_miles>6</avgvis_miles>
-                  <avghumidity>57</avghumidity>
-                  <tides>
-                      <tide>
-                          <tide_time>2024-10-22 03:38</tide_time>
-                          <tide_height_mt>0.20</tide_height_mt>
-                          <tide_type>LOW</tide_type>
-                      </tide>
-                      <tide>
-                          <tide_time>2024-10-22 10:34</tide_time>
-                          <tide_height_mt>0.70</tide_height_mt>
-                          <tide_type>HIGH</tide_type>
-                      </tide>
-                      <tide>
-                          <tide_time>2024-10-22 15:56</tide_time>
-                          <tide_height_mt>0.30</tide_height_mt>
-                          <tide_type>LOW</tide_type>
-                      </tide>
-                      <tide>
-                          <tide_time>2024-10-22 22:53</tide_time>
-                          <tide_height_mt>0.70</tide_height_mt>
-                          <tide_type>HIGH</tide_type>
-                      </tide>
-                  </tides>
-                  <condition>
-                      <text>Partly Cloudy </text>
-                      <icon>//cdn.weatherapi.com/weather/64x64/day/116.png</icon>
-                      <code>1003</code>
-                  </condition>
-                  <uv>5</uv>
-              </day>
-          </forecastday>
-      </forecast>
+      {forecast_xml}
+      {marine_xml}
       <boatInfo>
         <boatType>Cruising Yacht</boatType>
         <length>12.5</length>
@@ -130,7 +93,7 @@ messages = [
       </experience>
     </sailingData>
 
-    Based on provided location, forecast and boatInfo could you please provide me with 3 best locations to travel knowing I want my travel to be comfortable and take me around 6 hours?
+    Based on provided location, forecast and boatInfo could you please provide me with 5 destinations to travel with traveling time of 6 hours and different levels of comfort?
     """
         }
     ]
