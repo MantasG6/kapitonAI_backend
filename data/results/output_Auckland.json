@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":-35.0,
+            "lon":173.0
+         },
+         "name":"Tauranga",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":105.86,
+         "time":"07:05"
+      },
+      {
+         "coordinates":{
+            "lat":-34.85,
+            "lon":173.32
+         },
+         "name":"Bay of Islands",
+         "comfortLevel":"Moderate Sailing",
+         "distance":92.23,
+         "time":"06:09"
+      },
+      {
+         "coordinates":{
+            "lat":-37.7,
+            "lon":175.7
+         },
+         "name":"Whakatane",
+         "comfortLevel":"Challenging Sailing",
+         "distance":117.59,
+         "time":"07:54"
+      }
+   ]
+}

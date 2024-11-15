@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":45.3232,
+            "lon":-63.3216
+         },
+         "name":"Lunenburg",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":174.1,
+         "time":"07:11"
+      },
+      {
+         "coordinates":{
+            "lat":43.8319,
+            "lon":-66.1358
+         },
+         "name":"Yarmouth",
+         "comfortLevel":"Moderate Sailing",
+         "distance":342.3,
+         "time":"08:00"
+      },
+      {
+         "coordinates":{
+            "lat":44.3746,
+            "lon":-64.3101
+         },
+         "name":"Shelburne",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":111.6,
+         "time":"03:45"
+      }
+   ]
+}

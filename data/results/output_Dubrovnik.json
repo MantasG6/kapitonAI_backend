@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":42.6389,
+            "lon":18.113
+         },
+         "name":"Cavtat",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":14.55,
+         "time":"02:35"
+      },
+      {
+         "coordinates":{
+            "lat":42.9362,
+            "lon":17.4339
+         },
+         "name":"Korčula",
+         "comfortLevel":"Moderate Sailing",
+         "distance":33.58,
+         "time":"05:30"
+      },
+      {
+         "coordinates":{
+            "lat":42.6959,
+            "lon":17.9547
+         },
+         "name":"Sipanska Luka",
+         "comfortLevel":"Too Little Challenge",
+         "distance":21.11,
+         "time":"03:16"
+      }
+   ]
+}

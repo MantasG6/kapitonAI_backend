@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":24.5553,
+            "lon":-81.7806
+         },
+         "name":"Key West",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":214,
+         "time":"09:30"
+      },
+      {
+         "coordinates":{
+            "lat":27.4711,
+            "lon":-80.3283
+         },
+         "name":"Vero Beach",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":113,
+         "time":"06:00"
+      },
+      {
+         "coordinates":{
+            "lat":25.7917,
+            "lon":-80.1302
+         },
+         "name":"Miami",
+         "comfortLevel":"Challenging Sailing",
+         "distance":28,
+         "time":"02:00"
+      }
+   ]
+}

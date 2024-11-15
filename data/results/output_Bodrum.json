@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":36.4253,
+            "lon":28.214
+         },
+         "name":"Datça",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":53.48,
+         "time":"05:45"
+      },
+      {
+         "coordinates":{
+            "lat":37.0904,
+            "lon":27.2774
+         },
+         "name":"Kuşadası",
+         "comfortLevel":"Moderate Sailing",
+         "distance":73.11,
+         "time":"06:33"
+      },
+      {
+         "coordinates":{
+            "lat":36.6982,
+            "lon":28.2258
+         },
+         "name":"Marmaris",
+         "comfortLevel":"Moderate Sailing",
+         "distance":40.99,
+         "time":"04:52"
+      }
+   ]
+}

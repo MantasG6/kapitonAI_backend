@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":40.7128,
+            "lon":-74.006
+         },
+         "name":"New York",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":176.07,
+         "time":"06:20"
+      },
+      {
+         "coordinates":{
+            "lat":39.7162,
+            "lon":-75.2131
+         },
+         "name":"Cape May",
+         "comfortLevel":"Moderate Sailing",
+         "distance":231.79,
+         "time":"07:20"
+      },
+      {
+         "coordinates":{
+            "lat":38.9697,
+            "lon":-77.3391
+         },
+         "name":"Washington D.C.",
+         "comfortLevel":"Too Little Challenge",
+         "distance":297.91,
+         "time":"08:00"
+      }
+   ]
+}

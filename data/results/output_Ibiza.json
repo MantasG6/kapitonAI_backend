@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "name":"Cabrera Islands",
+         "coordinates":{
+            "lat":39.2165,
+            "lon":2.9344
+         },
+         "comfortLevel":"Moderate Sailing",
+         "distance":66.21,
+         "time":"07:49"
+      },
+      {
+         "name":"Dragonera Islands",
+         "coordinates":{
+            "lat":39.5947,
+            "lon":2.3569
+         },
+         "comfortLevel":"Comfortable Sailing",
+         "distance":53.73,
+         "time":"06:21"
+      },
+      {
+         "name":"Palma de Mallorca",
+         "coordinates":{
+            "lat":39.5667,
+            "lon":2.6314
+         },
+         "comfortLevel":"Comfortable Sailing",
+         "distance":56.83,
+         "time":"06:50"
+      }
+   ]
+}

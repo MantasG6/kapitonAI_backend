@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "name":"Skaftfell",
+         "coordinates":{
+            "lat":64.0,
+            "lon":-16.0
+         },
+         "comfortLevel":"Comfortable Sailing",
+         "distance":246.39,
+         "time":"08:00"
+      },
+      {
+         "name":"Vestmannaeyjar",
+         "coordinates":{
+            "lat":63.45,
+            "lon":-20.28
+         },
+         "comfortLevel":"Moderate Sailing",
+         "distance":110.34,
+         "time":"04:00"
+      },
+      {
+         "name":"Höfn",
+         "coordinates":{
+            "lat":64.25,
+            "lon":-15.22
+         },
+         "comfortLevel":"Comfortable Sailing",
+         "distance":179.65,
+         "time":"06:00"
+      }
+   ]
+}

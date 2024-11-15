@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":48.4363,
+            "lon":-123.3691
+         },
+         "name":"Victoria",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":60.88,
+         "time":"04:45"
+      },
+      {
+         "coordinates":{
+            "lat":49.5968,
+            "lon":-126.9297
+         },
+         "name":"Tofino",
+         "comfortLevel":"Moderate Sailing",
+         "distance":144.43,
+         "time":"08:00"
+      },
+      {
+         "coordinates":{
+            "lat":48.4314,
+            "lon":-124.7033
+         },
+         "name":"Port Renfrew",
+         "comfortLevel":"Challenging Sailing",
+         "distance":76.62,
+         "time":"05:05"
+      }
+   ]
+}

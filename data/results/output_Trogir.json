@@ -1,0 +1,34 @@
+{
+   "destinations":[
+      {
+         "coordinates":{
+            "lat":43.5167,
+            "lon":16.25
+         },
+         "name":"Split",
+         "comfortLevel":"Moderate Sailing",
+         "distance":11.2,
+         "time":"03:30"
+      },
+      {
+         "coordinates":{
+            "lat":43.7833,
+            "lon":15.5667
+         },
+         "name":"Šibenik",
+         "comfortLevel":"Challenging Sailing",
+         "distance":26.6,
+         "time":"06:30"
+      },
+      {
+         "coordinates":{
+            "lat":43.1667,
+            "lon":17.0167
+         },
+         "name":"Omiš",
+         "comfortLevel":"Comfortable Sailing",
+         "distance":4.4,
+         "time":"01:15"
+      }
+   ]
+}
