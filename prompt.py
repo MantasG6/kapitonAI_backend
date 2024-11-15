@@ -19,8 +19,8 @@ def get_result(location, localtime):
     weather_dict = json.loads(weather_json)
     marine_dict = json.loads(marine_json)
 
-    weather_xml = dict2xml(weather_dict, wrap="weather", indent="  ")
-    marine_xml = dict2xml(marine_dict, wrap="marine", indent="  ")
+    weather_xml = dict2xml(weather_dict, wrap="weather", indent="       ")
+    marine_xml = dict2xml(marine_dict, wrap="marine", indent="      ")
 
     messages = [
         {
@@ -84,8 +84,7 @@ def get_result(location, localtime):
         <maxTimeDuration>08:00</maxTimeDuration>
     </goal>
 </sailingData>
-Based on provided location, weather forecast, marine forecast, boatInfo and goal could you please provide me with 3 destinations to
-travel?
+Based on provided location, weather forecast, marine forecast, boatInfo and goal could you please provide me with 3 destinations to travel?
     """
         }
     ]

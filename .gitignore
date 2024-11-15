@@ -141,3 +141,6 @@ cython_debug/
 
 # Cache
 .cache.sqlite
+
+# Generated data
+/data/results
